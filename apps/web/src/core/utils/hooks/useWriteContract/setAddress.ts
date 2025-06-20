@@ -1,0 +1,4 @@
+export const setAddress = {
+  mint: '0xBEc49fA140aCaA83533fB00A2BB19bDdd0290f25',
+  stake: '0xD84379CEae14AA33C123Af12424A37803F885889'
+}

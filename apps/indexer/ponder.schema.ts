@@ -1,7 +1,6 @@
 import { onchainTable } from 'ponder';
 
-export const transfer = onchainTable('Transfer', (t) => ({
-  from: t.text(),
-  to: t.text(),
+export const mint = onchainTable('Mint', (t) => ({
+  owner: t.text(),
   tokenId: t.integer().primaryKey()
 }));

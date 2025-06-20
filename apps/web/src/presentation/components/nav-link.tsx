@@ -1,4 +1,4 @@
-import { cn } from '@/core/lib/utils';
+import { cn } from '@/core/utils/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type React from 'react';

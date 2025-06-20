@@ -1,7 +1,7 @@
 import { createConfig, mergeAbis } from 'ponder';
 import { http, type Abi, erc721Abi } from 'viem';
 
-import { abi } from './abis/bleuNFT.json';
+import { bleuNFT } from './abis/bleuNFT';
 
 export default createConfig({
   networks: {
@@ -16,9 +16,9 @@ export default createConfig({
       network: 'anvil_localhost_testnet',
       // TODO: Replace with the actual abi of the contract
       // Note: You'll probably want to use a mergeAbis function to merge the abi with the erc721 abi
-      abi: erc721Abi,
+      abi: bleuNFT,
       // TODO: Replace with the actual address of the contract
-      address: '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9',
+      address: '0xBEc49fA140aCaA83533fB00A2BB19bDdd0290f25',
       startBlock: 1,
     },
     bleuNFTStake: {

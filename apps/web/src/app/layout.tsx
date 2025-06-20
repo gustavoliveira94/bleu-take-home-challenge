@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Rubik } from 'next/font/google';
 import './globals.css';
-import Header from '@/presentation/components/header';
-import { cn } from '@/core/lib/utils';
 import { Providers } from '@/core/providers';
+import { cn } from '@/core/utils/utils';
+import Header from '@/presentation/components/header';
 
 const rubik = Rubik({
   weight: ['400', '500', '700'],

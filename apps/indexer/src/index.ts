@@ -1,12 +1,11 @@
 import { ponder } from 'ponder:registry';
-import { transfer } from '../ponder.schema';
+import { mint } from '../ponder.schema';
 
-ponder.on("bleuNFT:Transfer", async ({ context, event }) => {
+ponder.on("bleuNFT:Mint", async ({ context, event }) => {
   const { db } = context;
 
-  await db.insert(transfer).values({
+  await db.insert(mint).values({
     tokenId: Number(event.args.tokenId),
-    from: event.args.from,
-    to: event.args.to
+    owner: event.args.to
   })
 });
