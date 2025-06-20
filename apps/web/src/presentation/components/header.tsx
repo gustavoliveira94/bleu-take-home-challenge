@@ -1,6 +1,6 @@
 'use client';
 
-import { useThemeStore } from '@/store/useThemeStore';
+import { useThemeStore } from '@/core/store/useThemeStore';
 import { Moon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
@@ -24,7 +24,7 @@ const Header = () => {
         <ConnectWalletButton />
         <Button
           variant="ghost"
-          className="flex items-center justify-center rounded-full bg-primary/10 p-1 w-8 h-8 "
+          className="flex items-center justify-center rounded-full bg-primary/10 p-1 w-8 h-8 cursor-pointer"
           onClick={() => toggleTheme()}
         >
           <Moon size={18} className="text-primary" />

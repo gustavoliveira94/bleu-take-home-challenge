@@ -30,13 +30,13 @@
     "apps/*"
   ],
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@types/node": "^22.13.1",
-    "typescript": "^5.7.3",
-    "@biomejs/biome": "1.9.4"
+    "typescript": "^5.7.3"
   },
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=10.0.0"
   },
-  "packageManager": "pnpm@10.2.1"
+  "packageManager": "pnpm@10.12.1"
 }

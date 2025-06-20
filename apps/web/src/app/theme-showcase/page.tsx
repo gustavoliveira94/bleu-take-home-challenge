@@ -1,4 +1,4 @@
-import ThemeShowcase from '@/components/theme-showcase';
+import { ThemeShowcase } from '@/presentation/views';
 
 export default function ThemeShowcasePage() {
   return <ThemeShowcase />;

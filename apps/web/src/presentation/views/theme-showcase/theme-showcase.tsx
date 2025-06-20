@@ -1,10 +1,9 @@
 'use client';
 
-import { useThemeStore } from '@/store/useThemeStore';
-import React from 'react';
-import { Button } from './ui/button';
+import { useThemeStore } from '@/core/store/useThemeStore';
+import { Button } from '../../components/ui/button';
 
-export default function ThemeShowcase() {
+export const ThemeShowcase: React.FC = () => {
   const { theme, toggleTheme } = useThemeStore();
 
   return (
@@ -69,4 +68,4 @@ export default function ThemeShowcase() {
       </div>
     </div>
   );
-}
+};

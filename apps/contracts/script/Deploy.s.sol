@@ -17,6 +17,9 @@ contract Deploy is Script {
         nft = new BleuNFT();
         staker = new BleuNFTStaker(address(nft));
 
+        console.log("NFT address:", address(nft));
+        console.log("Staker address:", address(staker));
+
         vm.stopBroadcast();
     }
 }
