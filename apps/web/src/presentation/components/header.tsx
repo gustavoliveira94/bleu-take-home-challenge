@@ -12,7 +12,7 @@ const Header = () => {
   const { toggleTheme } = useThemeStore();
 
   return (
-    <header className="flex relative h-16 items-center justify-between bg-content mx-5 mt-6 px-5 rounded-3xl max-w-[1300px] mx-auto">
+    <header className="flex sticky top-0 h-16 items-center justify-between bg-content mx-5 mt-6 px-5 rounded-3xl max-w-[1300px] mx-auto z-10">
       <Link href="/">
         <h1 className="text-primary font-bold text-lg font-roboto-mono text-center">Bleu</h1>
       </Link>

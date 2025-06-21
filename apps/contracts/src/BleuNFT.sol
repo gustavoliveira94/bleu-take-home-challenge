@@ -9,10 +9,7 @@ contract BleuNFT is ERC721 {
     
     constructor() ERC721("BleuNFT", "BNFT") {}
 
-    function mint() public {
-        uint256 tokenId = _currentTokenId;
-        _currentTokenId++;
-
+    function mint(uint256 tokenId) public {
         _safeMint(msg.sender, tokenId);
         emit Mint(msg.sender, tokenId);
     }

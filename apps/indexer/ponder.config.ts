@@ -1,7 +1,8 @@
-import { createConfig, mergeAbis } from 'ponder';
-import { http, type Abi, erc721Abi } from 'viem';
+import { createConfig } from 'ponder';
+import { http } from 'viem';
 
-import { bleuNFT } from './abis/bleuNFT';
+import { bleuNFTMint } from './abis/bleuNFTMint';
+import { bleuNFTStake } from './abis/bleuNFTStake';
 
 export default createConfig({
   networks: {
@@ -14,20 +15,14 @@ export default createConfig({
   contracts: {
     bleuNFT: {
       network: 'anvil_localhost_testnet',
-      // TODO: Replace with the actual abi of the contract
-      // Note: You'll probably want to use a mergeAbis function to merge the abi with the erc721 abi
-      abi: bleuNFT,
-      // TODO: Replace with the actual address of the contract
-      address: '0xBEc49fA140aCaA83533fB00A2BB19bDdd0290f25',
+      abi: bleuNFTMint,
+      address: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
       startBlock: 1,
     },
     bleuNFTStake: {
       network: 'anvil_localhost_testnet',
-      // TODO: Replace with the actual abi of the contract
-      // Note: You'll probably want to use a mergeAbis function to merge the abi with the erc721 abi
-      abi: erc721Abi,
-      // TODO: Replace with the actual address of the contract
-      address: '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9',
+      abi: bleuNFTStake,
+      address: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
       startBlock: 1,
     },
   },

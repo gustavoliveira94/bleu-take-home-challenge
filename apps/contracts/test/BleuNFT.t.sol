@@ -14,7 +14,7 @@ contract BleuNFTTest is Test {
 
     function test_Mint() public {
         // placeholder
-        nft.mint();
+        nft.mint(0);
 
         address owner = nft.ownerOf(0);
         assertEq(owner, address(this));

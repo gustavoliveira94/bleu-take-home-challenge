@@ -8,7 +8,7 @@ import { arbitrum, base, localhost, mainnet, optimism, polygon, sepolia } from '
 
 const walletConnectProjectId = '';
 
-const config = createConfig(
+export const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
     chains: [

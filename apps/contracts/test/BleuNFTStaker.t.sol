@@ -22,7 +22,7 @@ contract BleuNFTStakerTest is Test {
     function test_Stake() public {
         // Mintar um NFT para o usuário
         vm.prank(user);
-        nft.mint();
+        nft.mint(0);
         console.log("NFT owner: %s", nft.ownerOf(0));
 
         // Verificar posse e estado antes do stake
@@ -35,7 +35,7 @@ contract BleuNFTStakerTest is Test {
         staker.stake(0);
     }
 
-    function testUnderlyingNFTAddress() public {
+    function testUnderlyingNFTAddress() public view {
         // Verificar o endereço do underlyingNFT
         console.log("underlyingNFT address: %s");
         // assertEq(staker.underlyingNFT(), address(nft), "Incorrect underlyingNFT address");

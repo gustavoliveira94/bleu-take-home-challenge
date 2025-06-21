@@ -26,7 +26,7 @@ contract BleuNFTStaker is ERC721, ERC721Holder {
         underlyingNFT.safeTransferFrom(msg.sender, address(this), tokenId);
 
         // Mintar NFT de recibo
-        // _mint(msg.sender, tokenId);
+        _mint(msg.sender, tokenId);
 
         // Track the staker
         stakerOf[tokenId] = msg.sender;
@@ -36,7 +36,7 @@ contract BleuNFTStaker is ERC721, ERC721Holder {
     function unstake(uint256 tokenId) public {
         require(ownerOf(tokenId) == msg.sender, "Not staker");
         // Burn the receipt NFT
-        // _burn(tokenId);
+        _burn(tokenId);
         // Transfer the NFT back to the user
         underlyingNFT.safeTransferFrom(address(this), msg.sender, tokenId);
         // Remove tracking

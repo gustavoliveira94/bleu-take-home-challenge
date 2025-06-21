@@ -1,4 +1,4 @@
-export const bleuNFT = [
+export const bleuNFTMint = [
     {
       "type": "event",
       "name": "Approval",
