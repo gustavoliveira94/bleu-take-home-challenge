@@ -13,9 +13,18 @@ export const NFT: React.FC<INFT> = memo(({ id, collection, image, name, status, 
   const action = actions?.action;
   const label = actions?.label;
 
+  const isAvailable = owner === 'You' || status === 'Mint';
+
   return (
-    <div className="flex border rounded-lg w-[400px] relative">
-      <Image src={image} alt={name} width={220} height={100} objectFit="contain" />
+    <div className="flex border rounded-lg min-w-[400px] relative">
+      <Image
+        src={image}
+        alt={name}
+        width={240}
+        height={275}
+        quality={100}
+        className="object-cover"
+      />
       <div className="p-4">
         <p>
           <b>ID:</b> <br /> #{id}
@@ -33,7 +42,7 @@ export const NFT: React.FC<INFT> = memo(({ id, collection, image, name, status, 
           <b>Status:</b> <br /> {status}
         </p>
       </div>
-      {owner === 'You' || status === 'Mint' ? (
+      {isAvailable ? (
         <button
           type="button"
           className="absolute right-4 top-4 cursor-pointer bg-primary p-2 rounded-lg text-primary-foreground"

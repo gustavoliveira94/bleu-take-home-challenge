@@ -19,6 +19,7 @@ ponder.on("bleuNFTStake:Stake", async ({ context, event }) => {
         tokenId: Number(event.args.tokenId),
         owner: event.args.to,
         timestamp: event.block.timestamp,
+        active: true
       }).onConflictDoUpdate({
         active: true,
       }),

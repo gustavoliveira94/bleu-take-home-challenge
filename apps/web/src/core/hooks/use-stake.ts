@@ -1,4 +1,4 @@
-import { configWriteContract } from '../utils/hooks/use-write-contracts/config-write-contracts';
+import { configContract } from '../utils/config-contracts';
 import { useWaitForTransactionReceipt } from './use-wait-for-transaction-receipt';
 import { useWriteContract } from './use-write-contract';
 
@@ -11,7 +11,7 @@ export const useStake = () => {
     try {
       await writeContract({
         contract: 'mint',
-        args: [configWriteContract.stake.address, tokenId],
+        args: [configContract.stake.address, tokenId],
         functionName: 'approve',
       });
 

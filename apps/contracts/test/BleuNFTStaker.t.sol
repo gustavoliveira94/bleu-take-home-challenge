@@ -4,16 +4,19 @@ pragma solidity ^0.8.20;
 import {Test, console} from "forge-std/Test.sol";
 import {BleuNFTStaker} from "../src/BleuNFTStaker.sol";
 import {BleuNFT} from "../src/BleuNFT.sol";
+import {BleuNFTRewards} from "../src/BleuNFTRewards.sol";
 import "forge-std/Test.sol";
 
 contract BleuNFTStakerTest is Test {
     BleuNFTStaker public staker;
     BleuNFT public nft;
+    BleuNFTRewards public rewards;
     address user = address(0x1234);
 
     function setUp() public {
         nft = new BleuNFT();
-        staker = new BleuNFTStaker(address(nft));   
+        rewards = new BleuNFTRewards();
+        staker = new BleuNFTStaker(address(nft), address(rewards));   
 
         // Configurar o usuário com ETH
         vm.deal(user, 10 ether);     

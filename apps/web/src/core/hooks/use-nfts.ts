@@ -34,39 +34,41 @@ export const useNFTs = () => {
   });
 
   const mapNFTs = (): INFT[] => {
-    return nftMockList.map((nft) => {
-      const isMinted = mints?.mints?.items.find(({ tokenId }) => tokenId === nft.id);
-      const isOwner = isMinted?.owner === address;
-      const staked = stakes?.stakes?.items.find(
-        ({ tokenId, owner, active }) => tokenId === nft.id && owner === address && active
-      );
+    return nftMockList
+      .map((nft) => {
+        const isMinted = mints?.mints?.items.find(({ tokenId }) => tokenId === nft.id);
+        const isOwner = isMinted?.owner === address;
+        const staked = stakes?.stakes?.items.find(
+          ({ tokenId, owner, active }) => tokenId === nft.id && owner === address && active
+        );
 
-      let owner = '-';
+        let owner = '-';
 
-      if (isMinted) {
-        owner = `${isMinted?.owner.slice(0, 6)}...${isMinted?.owner.slice(-4)}`;
-      }
+        if (isMinted) {
+          owner = `${isMinted?.owner.slice(0, 6)}...${isMinted?.owner.slice(-4)}`;
+        }
 
-      if (isOwner) {
-        owner = 'You';
-      }
+        if (isOwner) {
+          owner = 'You';
+        }
 
-      let status: 'Minted' | 'Mint' | 'Staked' = 'Mint';
+        let status: 'Minted' | 'Mint' | 'Staked' = 'Mint';
 
-      if (isMinted) {
-        status = 'Minted';
-      }
+        if (isMinted) {
+          status = 'Minted';
+        }
 
-      if (staked) {
-        status = 'Staked';
-      }
+        if (staked) {
+          status = 'Staked';
+        }
 
-      return {
-        ...nft,
-        status,
-        owner,
-      };
-    });
+        return {
+          ...nft,
+          status,
+          owner,
+        };
+      })
+      .sort((a, b) => b.owner.localeCompare(a.owner));
   };
 
   return {

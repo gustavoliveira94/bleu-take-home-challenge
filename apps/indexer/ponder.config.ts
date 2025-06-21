@@ -16,13 +16,13 @@ export default createConfig({
     bleuNFT: {
       network: 'anvil_localhost_testnet',
       abi: bleuNFTMint,
-      address: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+      address: '0x9d4454B023096f34B160D6B654540c56A1F81688',
       startBlock: 1,
     },
     bleuNFTStake: {
       network: 'anvil_localhost_testnet',
       abi: bleuNFTStake,
-      address: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+      address: '0x36C02dA8a0983159322a80FFE9F24b1acfF8B570',
       startBlock: 1,
     },
   },

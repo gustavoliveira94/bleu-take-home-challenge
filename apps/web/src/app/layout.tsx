@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(rubik.className, 'bg-background text-foreground')}>
+      <body className={cn(rubik.className, 'bg-background text-foreground pl-4 pr-4')}>
         <Providers>
           <Header />
           {children}

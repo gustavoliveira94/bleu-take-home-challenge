@@ -1,10 +1,10 @@
 import { useWriteContract as useWrite } from 'wagmi';
 
 import { useState } from 'react';
-import { configWriteContract } from '../utils/hooks/use-write-contracts/config-write-contracts';
+import { configContract } from '../utils/config-contracts';
 
 interface IWriteContract {
-  contract: keyof typeof configWriteContract;
+  contract: keyof typeof configContract;
   functionName: string;
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   args: any[];
@@ -16,7 +16,7 @@ export const useWriteContract = () => {
   const [loading, setLoading] = useState(false);
 
   const writeContract = async ({ contract, functionName, args }: IWriteContract) => {
-    const { abi, address } = configWriteContract[contract];
+    const { abi, address } = configContract[contract];
 
     setLoading(true);
 

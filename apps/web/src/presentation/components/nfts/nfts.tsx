@@ -27,5 +27,9 @@ export const NFTs: React.FC<NFTsProps> = ({ children }) => {
     );
   }
 
-  return <div className="grid grid-cols-3 gap-4 pt-4 pb-10">{children({ nfts })}</div>;
+  return (
+    <div className="grid gap-4 pt-4 pb-10 grid-cols-[repeat(auto-fit,minmax(400px,1fr))]">
+      {children({ nfts })}
+    </div>
+  );
 };

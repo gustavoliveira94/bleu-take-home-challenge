@@ -7,7 +7,7 @@ import { NFT } from '@/presentation/components/nft/nft';
 import { useUserInformations } from '@/core/hooks/use-user-informations';
 
 export const Dashboard: React.FC = () => {
-  const { totalStaked, totalNFTs } = useUserInformations();
+  const { totalStaked, totalNFTs, totalRewards } = useUserInformations();
 
   return (
     <section className="w-full max-w-[1300px] mx-auto space-y-4">
@@ -19,7 +19,7 @@ export const Dashboard: React.FC = () => {
         <div className="flex items-center justify-center gap-[24px]">
           <p className="text-[14px]">Total NFTs: {totalNFTs}</p>
           <p className="text-[14px]">Total NFTs Staked: {totalStaked}</p>
-          <p className="text-[14px]">Total Rewards: 0</p>
+          <p className="text-[14px]">Total Rewards: {totalRewards}</p>
         </div>
       </div>
       <div className="w-full pt-[24px]">
