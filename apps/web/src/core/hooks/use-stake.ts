@@ -1,8 +1,11 @@
 import { configContract } from '../utils/config-contracts';
+import { useToast } from './use-toast';
 import { useWaitForTransactionReceipt } from './use-wait-for-transaction-receipt';
 import { useWriteContract } from './use-write-contract';
 
 export const useStake = () => {
+  const { toast } = useToast();
+
   const { setTxHash } = useWaitForTransactionReceipt({ query: 'stakes' });
 
   const { writeContract, loading } = useWriteContract();
@@ -22,8 +25,9 @@ export const useStake = () => {
       });
 
       setTxHash(tx!);
+      toast({ message: 'Staking successful' });
     } catch (error) {
-      console.error('Error staking:', error);
+      toast({ message: 'Error staking', type: 'error' });
     }
   };
 
@@ -36,8 +40,9 @@ export const useStake = () => {
       });
 
       setTxHash(tx!);
+      toast({ message: 'Unstaking successful' });
     } catch (error) {
-      console.error('Error staking:', error);
+      toast({ message: 'Error unstaking', type: 'error' });
     }
   };
 

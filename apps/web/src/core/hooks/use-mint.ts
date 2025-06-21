@@ -1,7 +1,10 @@
 import { useWriteContract } from './use-write-contract';
 import { useWaitForTransactionReceipt } from './use-wait-for-transaction-receipt';
+import { useToast } from './use-toast';
 
 export const useMint = () => {
+  const { toast } = useToast();
+
   const { setTxHash } = useWaitForTransactionReceipt({ query: 'mints' });
 
   const { writeContract, loading } = useWriteContract();
@@ -15,8 +18,9 @@ export const useMint = () => {
       });
 
       setTxHash(tx!);
+      toast({ message: 'Minting successful' });
     } catch (error) {
-      console.error('Error minting:', error);
+      toast({ message: 'Error minting', type: 'error' });
     }
   };
 

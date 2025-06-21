@@ -17,9 +17,11 @@ export const useWaitForTransactionReceipt = ({ query }: IUseWaitForTransactionRe
 
   useEffect(() => {
     if (isSuccess) {
-      client.invalidateQueries({
-        queryKey: [query],
-      });
+      const timeout = setTimeout(() => {
+        client.invalidateQueries({ queryKey: [query] });
+      }, 2000);
+
+      return () => clearTimeout(timeout);
     }
   }, [isSuccess]);
 
