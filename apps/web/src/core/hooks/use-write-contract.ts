@@ -34,7 +34,7 @@ export const useWriteContract = () => {
     } catch (e) {
       setLoading(false);
 
-      return;
+      throw e;
     }
   };
 

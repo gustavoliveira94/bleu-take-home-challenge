@@ -3,11 +3,11 @@ import { abi as mintAbi } from '@/core/utils/abis/bleuNFT.json';
 
 export const configContract = {
   mint: {
-    address: '0x9d4454B023096f34B160D6B654540c56A1F81688' as `0x${string}`,
+    address: '0x5FbDB2315678afecb367f032d93F642f64180aa3' as `0x${string}`,
     abi: mintAbi,
   },
   stake: {
-    address: '0x36C02dA8a0983159322a80FFE9F24b1acfF8B570' as `0x${string}`,
+    address: '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0' as `0x${string}`,
     abi: stakeAbi,
   },
 };

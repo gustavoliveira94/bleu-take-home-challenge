@@ -12,7 +12,7 @@ interface IUseReadContract {
 export const useReadContract = ({ args, contract, functionName }: IUseReadContract) => {
   const { abi, address } = configContract[contract];
 
-  const { data, isLoading } = useRead({
+  const { data, isLoading, refetch } = useRead({
     address,
     abi,
     functionName,

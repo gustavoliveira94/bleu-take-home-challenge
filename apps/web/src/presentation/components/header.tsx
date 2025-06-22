@@ -19,7 +19,8 @@ const Header = () => {
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-4 text-lg">
         <NavLink href="/">Home</NavLink>
         <NavLink href="/dashboard">Dashboard</NavLink>
-        <NavLink href="/theme-showcase">Theme Showcase</NavLink>
+        <NavLink href="/transactions">Transactions</NavLink>
+        {/* <NavLink href="/theme-showcase">Theme Showcase</NavLink> */}
       </div>
       <div className="flex items-center gap-2">
         <ConnectWalletButton />

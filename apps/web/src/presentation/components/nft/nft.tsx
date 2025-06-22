@@ -6,17 +6,19 @@ import Image from 'next/image';
 import type { INFT } from '@/core/interfaces/nft';
 
 import { useNFT } from './hooks/use-nft';
+import { useAccount } from 'wagmi';
 
 export const NFT: React.FC<INFT> = memo(({ id, collection, image, name, status, owner }) => {
+  const { status: statusWallet } = useAccount();
   const { actions } = useNFT({ status });
 
   const action = actions?.action;
   const label = actions?.label;
 
-  const isAvailable = owner === 'You' || status === 'Mint';
+  const isAvailable = (owner === 'You' || status === 'Mint') && statusWallet === 'connected';
 
   return (
-    <div className="flex border rounded-lg min-w-[400px] relative">
+    <div className="flex border rounded-lg w-full xl:w-[420px] relative">
       <Image
         src={image}
         alt={name}

@@ -10,6 +10,18 @@ export const queryStake = `
     }
 `;
 
+export const queryUnstake = `
+    query Stake{
+        unstakes {
+          items {
+            owner
+            tokenId
+            timestamp
+          }
+        }
+    }
+`;
+
 export const queryStakeByUserTotalCount = `
     query StakeByUser($owner: String!) {
         stakes(where: { owner: $owner, active: true }) {
@@ -25,6 +37,7 @@ export const queryAllStake = `
             id
             owner
             tokenId
+            timestamp
           }
         }
     }

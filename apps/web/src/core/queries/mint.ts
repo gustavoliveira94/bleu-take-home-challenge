@@ -4,6 +4,7 @@ export const queryMint = `
           items {
             owner
             tokenId
+            timestamp
           }
         }
     }

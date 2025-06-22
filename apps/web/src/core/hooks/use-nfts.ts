@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import request from 'graphql-request';
 import { useAccount } from 'wagmi';
+
+import { graphQLClient } from '@/configs/graphql/graphql';
+
 import type { IMint } from '../interfaces/mint';
 import type { INFT } from '../interfaces/nft';
 import { nftMockList } from '../utils/mock-nfts';
@@ -9,13 +11,12 @@ import { queryMint } from '../queries/mint';
 import { queryStake } from '../queries/stake';
 
 export const useNFTs = () => {
-  const { address } = useAccount();
+  const { address, status: statusWallet } = useAccount();
 
   const { data: mints, isLoading: mintLoading } = useQuery<{ mints: { items: IMint[] } }>({
     queryKey: ['mints'],
     queryFn: () =>
-      request(
-        'http://localhost:42069',
+      graphQLClient.request(
         `
       ${queryMint}
     `
@@ -25,8 +26,7 @@ export const useNFTs = () => {
   const { data: stakes, isLoading: stakeLoading } = useQuery<{ stakes: { items: IStake[] } }>({
     queryKey: ['stakes'],
     queryFn: () =>
-      request(
-        'http://localhost:42069',
+      graphQLClient.request(
         `
       ${queryStake}
     `
@@ -37,7 +37,7 @@ export const useNFTs = () => {
     return nftMockList
       .map((nft) => {
         const isMinted = mints?.mints?.items.find(({ tokenId }) => tokenId === nft.id);
-        const isOwner = isMinted?.owner === address;
+        const isOwner = isMinted?.owner === address && statusWallet === 'connected';
         const staked = stakes?.stakes?.items.find(
           ({ tokenId, owner, active }) => tokenId === nft.id && owner === address && active
         );
