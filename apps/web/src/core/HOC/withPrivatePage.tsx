@@ -4,6 +4,7 @@ import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useAccount } from 'wagmi';
+
 import { useToast } from '../hooks/use-toast';
 
 export const withPrivatePage = (Component: React.FC) => {

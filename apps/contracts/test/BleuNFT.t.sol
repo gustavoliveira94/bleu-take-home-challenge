@@ -1,22 +1,44 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.20;
 
-
-import {Test, console} from "forge-std/Test.sol";
-import {BleuNFT} from "../src/BleuNFT.sol";
+import "forge-std/Test.sol";
+import "../src/BleuNFT.sol";
 
 contract BleuNFTTest is Test {
-    BleuNFT public nft;
+    BleuNFT public bleuNFT;
+    address user1 = address(0x1);
+    address user2 = address(0x2);
 
     function setUp() public {
-        nft = new BleuNFT();
+        bleuNFT = new BleuNFT();
     }
 
-    function test_Mint() public {
-        // placeholder
-        nft.mint(0);
+    function testInitialNameAndSymbol() public {
+        assertEq(bleuNFT.name(), "BleuNFT");
+        assertEq(bleuNFT.symbol(), "BNFT");
+    }
 
-        address owner = nft.ownerOf(0);
-        assertEq(owner, address(this));
+    function testMintingIncreasesBalance() public {
+        vm.prank(user1);
+        bleuNFT.mint(1);
+
+        assertEq(bleuNFT.ownerOf(1), user1);
+        assertEq(bleuNFT.balanceOf(user1), 1);
+    }
+
+    function testCannotMintSameTokenTwice() public {
+        vm.prank(user1);
+        bleuNFT.mint(1);
+
+        vm.expectRevert(); // Already minted
+        vm.prank(user2);
+        bleuNFT.mint(1);
+    }
+
+    function testMintEmitsEvent() public {
+        vm.prank(user1);
+        vm.expectEmit(true, true, false, true);
+        emit BleuNFT.Mint(user1, 42);
+        bleuNFT.mint(42);
     }
 }
