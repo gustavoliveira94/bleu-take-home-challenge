@@ -1,5 +1,11 @@
 const GRAPHQL_URL = process.env.NEXT_PUBLIC_GRAPHQL_URL || '';
+const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL || '';
+const NFT_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS || '';
+const STAKER_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_STAKER_CONTRACT_ADDRESS || '';
 
 export const constants = {
   GRAPHQL_URL,
+  NFT_CONTRACT_ADDRESS,
+  STAKER_CONTRACT_ADDRESS,
+  RPC_URL,
 };

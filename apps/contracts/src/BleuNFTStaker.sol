@@ -88,6 +88,8 @@ contract BleuNFTStaker is ERC721, ERC721Holder {
         for (uint256 i = 0; i < tokens.length; i++) {
             totalReward += calculateReward(tokens[i]);
         }
+
+        return totalReward;
     }
 
     // Internal: removes a tokenId from the user's staked list

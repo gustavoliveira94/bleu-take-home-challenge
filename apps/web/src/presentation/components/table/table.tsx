@@ -14,7 +14,7 @@ export const Table: React.FC<TableProps> = ({
   noData = 'There are no data.',
 }) => {
   return (
-    <div className="overflow-auto rounded-lg border border-foreground/10">
+    <div className="overflow-auto rounded-lg border border-foreground/10" data-testid="table">
       <table
         className={`min-w-full ${loading ? 'min-h-[120px]' : ''} text-sm text-left text-foreground`}
       >
@@ -30,7 +30,7 @@ export const Table: React.FC<TableProps> = ({
 
         <tbody className="bg-background divide-y divide-foreground/5">
           {loading ? (
-            <tr>
+            <tr data-testid="loading">
               <td colSpan={columns.length}>
                 <Loader2 color="#ff0420" className="w-12 h-12 animate-1 animate-spin mx-auto" />
               </td>

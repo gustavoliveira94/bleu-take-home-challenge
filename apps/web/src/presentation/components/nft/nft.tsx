@@ -2,11 +2,11 @@
 
 import { memo } from 'react';
 import Image from 'next/image';
+import { useAccount } from 'wagmi';
 
 import type { INFT } from '@/core/interfaces/nft';
 
 import { useNFT } from './hooks/use-nft';
-import { useAccount } from 'wagmi';
 
 export const NFT: React.FC<INFT> = memo(({ id, collection, image, name, status, owner }) => {
   const { status: statusWallet } = useAccount();

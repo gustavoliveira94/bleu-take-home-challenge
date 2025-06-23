@@ -40,7 +40,6 @@ export const Dashboard: React.FC = () => {
                   image={nft.image}
                   name={nft.name}
                   status={nft.status}
-                  rarity={nft.rarity}
                   owner={nft.owner}
                 />
               );

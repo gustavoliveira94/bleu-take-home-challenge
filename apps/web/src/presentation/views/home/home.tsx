@@ -15,7 +15,6 @@ export const Home: React.FC = () => {
               id={nft.id}
               name={nft.name}
               image={nft.image}
-              rarity={nft.rarity}
               status={nft.status}
               owner={nft.owner}
             />

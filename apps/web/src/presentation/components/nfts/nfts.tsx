@@ -1,8 +1,9 @@
 'use client';
 
+import { Loader2 } from 'lucide-react';
+
 import { useNFTs } from '@/core/hooks/use-nfts';
 import type { INFT } from '@/core/interfaces/nft';
-import { Loader2 } from 'lucide-react';
 
 interface NFTsProps {
   children: ({ nfts }: { nfts: INFT[] }) => React.ReactNode;
@@ -13,7 +14,7 @@ export const NFTs: React.FC<NFTsProps> = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="w-full h-[500px] flex items-center justify-center">
+      <div className="w-full h-[500px] flex items-center justify-center" data-testid="loading">
         <Loader2 color="#ff0420" className="w-12 h-12 animate-1 animate-spin" />
       </div>
     );

@@ -115,9 +115,9 @@ contract BleuNFTStakerTest is Test {
         staker.unstake(1); // msg.sender is this contract
     }
 
-    function testRewardZeroIfNeverStaked() public {
+    function testRewardZeroIfNeverStaked() public view {
         // Rewards should be zero for non-existent stakes
-        uint256 reward = staker.calculateReward(999);
-        assertEq(reward, 0);
+        uint256 _reward = staker.calculateReward(999);
+        assertEq(_reward, 0);
     }
 }
