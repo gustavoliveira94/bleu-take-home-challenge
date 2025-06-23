@@ -118,9 +118,9 @@ The Ponder indexer:
 
 ## ENVS
 
-NFT_CONTRACT_ADDRESS=0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
-STAKE_CONTRACT_ADDRESS=0x0165878A594ca255338adfa4d48449f69242Eb8F
-RPC_URL=http://localhost:8545
+NFT_CONTRACT_ADDRESS=
+STAKE_CONTRACT_ADDRESS=
+RPC_URL=
 
 See [apps/indexer/README.md](apps/indexer/README.md) for indexer-specific documentation.
 
