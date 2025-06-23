@@ -97,7 +97,7 @@ The Next.js frontend features:
 - Staking management
 - Real-time updates via GraphQL
 
-ENVs:
+##ENVs:
 
 NEXT_PUBLIC_NFT_CONTRACT_ADDRESS=
 NEXT_PUBLIC_STAKER_CONTRACT_ADDRESS=
@@ -106,6 +106,8 @@ NEXT_PUBLIC_RPC_URL=
 
 See [apps/web/README.md](apps/web/README.md) for frontend-specific documentation.
 
+------------------------------------------------------------
+
 ## Indexer
 
 The Ponder indexer:
@@ -113,6 +115,12 @@ The Ponder indexer:
 - Indexes NFT transfers and staking events
 - Provides GraphQL API for querying NFT states
 - Supports filtering and pagination
+
+## ENVS
+
+NFT_CONTRACT_ADDRESS=0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
+STAKE_CONTRACT_ADDRESS=0x0165878A594ca255338adfa4d48449f69242Eb8F
+RPC_URL=http://localhost:8545
 
 See [apps/indexer/README.md](apps/indexer/README.md) for indexer-specific documentation.
 
