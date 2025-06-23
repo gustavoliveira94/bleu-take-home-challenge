@@ -54,6 +54,14 @@ forge build
 forge test
 ```
 
+## Local Development
+
+Start a local node:
+
+```bash
+anvil
+```
+
 ## Deployment
 
 To deploy to a testnet (e.g., Sepolia):
@@ -61,6 +69,16 @@ To deploy to a testnet (e.g., Sepolia):
 ```bash
 forge script script/BleuNFT.s.sol:BleuNFTScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
+
+To deploy local (e.g., Sepolia):
+
+```bash
+pnpm deploy
+```
+
+## Send tokens to staker contract
+
+cast send   --rpc-url $RPC_URL --private-key $PRIVATE_KEY $REWARDS_CONTRACT_ADDRESS "transfer(address,uint256)" $STAKER_CONTRACT_ADDRESS 100000000000000000000000
 
 ## Contract Verification
 
@@ -82,14 +100,6 @@ Generate gas snapshots:
 
 ```bash
 forge snapshot
-```
-
-## Local Development
-
-Start a local node:
-
-```bash
-anvil
 ```
 
 ## Contract Interaction
