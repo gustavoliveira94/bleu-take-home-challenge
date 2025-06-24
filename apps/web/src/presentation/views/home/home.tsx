@@ -3,10 +3,14 @@
 import { NFT } from '@/presentation/components/nft/nft';
 import { NFTs } from '@/presentation/components/nfts/nfts';
 
-export const Home: React.FC = () => {
+interface HomeProps {
+  address: `0x${string}`;
+}
+
+export const Home: React.FC<HomeProps> = ({ address }) => {
   return (
     <section className="w-full max-w-[1300px] mx-auto space-y-4 pt-10 pb-10">
-      <NFTs>
+      <NFTs address={address}>
         {({ nfts }) => {
           return nfts?.map((nft) => (
             <NFT

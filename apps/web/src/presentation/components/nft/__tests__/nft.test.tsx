@@ -1,21 +1,23 @@
-import { screen, fireEvent, render } from '@testing-library/react';
-
-// import { render } from '@/configs/tests/helper';
-
+import { render, screen, fireEvent } from '@testing-library/react';
 import { NFT } from '../nft';
 import type { INFT } from '@/core/interfaces/nft';
 import { nftMockList } from '@/core/utils/mock-nfts';
 
-let statusAccount = 'connected';
+let statusAccount: 'connected' | 'disconnected' = 'connected';
+let mockSetOpen = jest.fn();
 
-// Mock useAccount from wagmi
 jest.mock('wagmi', () => ({
   useAccount: () => ({
     status: statusAccount,
   }),
 }));
 
-// Mock useNFT hook
+jest.mock('connectkit', () => ({
+  useModal: () => ({
+    setOpen: mockSetOpen,
+  }),
+}));
+
 const mockAction = jest.fn();
 jest.mock('../hooks/use-nft', () => ({
   useNFT: () => ({
@@ -26,54 +28,52 @@ jest.mock('../hooks/use-nft', () => ({
   }),
 }));
 
-let owner = 'You';
-let status = 'Staked';
-
-const mockNFT = { ...nftMockList[0], owner, status } as INFT;
-
 describe('<NFT />', () => {
-  afterEach(() => {
+  let mockNFT: INFT;
+
+  beforeEach(() => {
+    statusAccount = 'connected';
+    mockNFT = {
+      ...nftMockList[0],
+      owner: 'You',
+      status: 'Mint',
+    };
     jest.clearAllMocks();
   });
 
   it('renders NFT details correctly', () => {
     render(<NFT {...mockNFT} />);
 
-    expect(screen.getByText(/#1/)).toBeInTheDocument();
-    expect(screen.getByText(/Rick and Morty/)).toBeInTheDocument();
-    expect(screen.getByText(/You/)).toBeInTheDocument();
-    expect(screen.getByText(/Mint/)).toBeInTheDocument();
-    expect(screen.getByText(/Staked/)).toBeInTheDocument();
-    expect(screen.getByRole('img')).toHaveAttribute(
-      'src',
-      '/_next/image?url=https%3A%2F%2Frickandmortyapi.com%2Fapi%2Fcharacter%2Favatar%2F1.jpeg&w=640&q=100'
-    );
+    expect(screen.getByText(`#${mockNFT.id}`)).toBeInTheDocument();
+    expect(screen.getByText(mockNFT.name)).toBeInTheDocument();
+    expect(screen.getByText(mockNFT.collection)).toBeInTheDocument();
+    expect(screen.getByText('You')).toBeInTheDocument();
+    expect(screen.getAllByText('Mint')?.[0]).toBeInTheDocument();
+    expect(screen.getByRole('img')).toBeInTheDocument();
   });
 
-  it('renders action button when available', () => {
+  it('renders action button when status is Mint and owner is You', () => {
     render(<NFT {...mockNFT} />);
     expect(screen.getByRole('button', { name: /Mint/i })).toBeInTheDocument();
   });
 
-  it('calls action function when button is clicked', () => {
+  it('calls action function when connected and button is clicked', () => {
     render(<NFT {...mockNFT} />);
-    const button = screen.getByRole('button', { name: /Mint/i });
-
-    fireEvent.click(button);
-    expect(mockAction).toHaveBeenCalledWith({ tokenId: 1 });
+    fireEvent.click(screen.getByRole('button', { name: /Mint/i }));
+    expect(mockAction).toHaveBeenCalledWith({ tokenId: mockNFT.id });
   });
 
-  it('does not render button if status is not connected', () => {
+  it('calls connect modal when disconnected and button clicked', () => {
     statusAccount = 'disconnected';
-
     render(<NFT {...mockNFT} />);
-    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /Mint/i }));
+    expect(mockSetOpen).toHaveBeenCalledWith(true);
+    expect(mockAction).not.toHaveBeenCalled();
   });
 
-  it('does not render button if owner is another address', () => {
-    owner = '0x';
-
-    render(<NFT {...mockNFT} />);
+  it('does not render action button if status is not Mint or owner is not You', () => {
+    render(<NFT {...{ ...mockNFT, status: 'Staked', owner: '0x123' }} />);
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 });

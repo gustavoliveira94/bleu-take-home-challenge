@@ -1,66 +1,51 @@
+// __tests__/transactions.test.tsx
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-
 import { Transactions } from '../transactions';
 
-// Mocking useTransactions hook
-jest.mock('@/core/hooks/use-transactions', () => ({
-  useTransactions: jest.fn(),
-}));
-
 describe('<Transactions />', () => {
-  const useTransactionsMock = require('@/core/hooks/use-transactions').useTransactions;
+  const mockTransactions = {
+    mints: [
+      ['1', '0xOwner1', '2024-01-01'],
+      ['2', '0xOwner2', '2024-01-02'],
+    ],
+    stakes: [['3', '0xStaker1', '2024-02-01']],
+    unstake: [['4', '0xUnstaker1', '2024-03-01']],
+  };
 
-  beforeEach(() => {
-    useTransactionsMock.mockReturnValue({
-      mints: [
-        ['1', '0xOwner1', '2024-01-01'],
-        ['2', '0xOwner2', '2024-01-02'],
-      ],
-      stakes: [],
-      unstake: [],
-      loadingMints: false,
-      loadingStakes: false,
-      loadingUnstake: false,
-    });
-  });
+  it('renders all 3 transaction sections with correct headers and data', () => {
+    render(<Transactions transactions={mockTransactions} />);
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('renders mints, stakes, and unstakes sections', () => {
-    render(<Transactions />);
-
-    // Check section headers
-    expect(screen.getByText(/MINTS/i)).toBeInTheDocument();
+    // Headers
+    expect(screen.getByText('MINTS')).toBeInTheDocument();
     expect(screen.getByText('STAKES')).toBeInTheDocument();
     expect(screen.getByText('UNSTAKES')).toBeInTheDocument();
 
-    // Check that mocked tables are rendered
-    const tables = screen.getAllByTestId('table');
-    expect(tables).toHaveLength(3);
-
-    // Check content of the mint table
+    // Mint data
     expect(screen.getByText('0xOwner1')).toBeInTheDocument();
-    expect(screen.getByText('2024-01-02')).toBeInTheDocument();
-    expect(screen.getByText('0xOwner1')).toBeInTheDocument();
+    expect(screen.getByText('0xOwner2')).toBeInTheDocument();
     expect(screen.getByText('2024-01-01')).toBeInTheDocument();
+    expect(screen.getByText('2024-01-02')).toBeInTheDocument();
+
+    // Stake data
+    expect(screen.getByText('0xStaker1')).toBeInTheDocument();
+    expect(screen.getByText('2024-02-01')).toBeInTheDocument();
+
+    // Unstake data
+    expect(screen.getByText('0xUnstaker1')).toBeInTheDocument();
+    expect(screen.getByText('2024-03-01')).toBeInTheDocument();
   });
 
-  it('shows loading state for all tables', () => {
-    useTransactionsMock.mockReturnValue({
-      mints: [],
-      stakes: [],
-      unstake: [],
-      loadingMints: true,
-      loadingStakes: true,
-      loadingUnstake: true,
-    });
+  it('renders empty tables when no data is provided', () => {
+    render(<Transactions transactions={{ mints: [], stakes: [], unstake: [] }} />);
 
-    render(<Transactions />);
+    // Still shows section headers
+    expect(screen.getByText('MINTS')).toBeInTheDocument();
+    expect(screen.getByText('STAKES')).toBeInTheDocument();
+    expect(screen.getByText('UNSTAKES')).toBeInTheDocument();
 
-    const loadingTexts = screen.getAllByTestId('loading');
-    expect(loadingTexts).toHaveLength(3);
+    // No rows found
+    expect(screen.queryByText('0xOwner1')).not.toBeInTheDocument();
+    expect(screen.queryByText('2024-01-01')).not.toBeInTheDocument();
   });
 });

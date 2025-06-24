@@ -1,5 +1,3 @@
-'use client';
-
 import { Loader2 } from 'lucide-react';
 
 import { useNFTs } from '@/core/hooks/use-nfts';
@@ -7,10 +5,11 @@ import type { INFT } from '@/core/interfaces/nft';
 
 interface NFTsProps {
   children: ({ nfts }: { nfts: INFT[] }) => React.ReactNode;
+  address: `0x${string}`;
 }
 
-export const NFTs: React.FC<NFTsProps> = ({ children }) => {
-  const { nfts, loading } = useNFTs();
+export const NFTs: React.FC<NFTsProps> = ({ children, address }) => {
+  const { nfts, loading } = useNFTs({ address });
 
   if (loading) {
     return (

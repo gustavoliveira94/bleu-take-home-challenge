@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/presentation/components/ui/button';
 import { ConnectKitButton } from 'connectkit';
 

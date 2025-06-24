@@ -40,7 +40,16 @@ export const Web3Provider = ({ children }: { children: ReactNode }) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider>{children}</ConnectKitProvider>
+        <ConnectKitProvider
+          onConnect={({ address }) => {
+            document.cookie = `wallet=${address};`;
+          }}
+          onDisconnect={() => {
+            document.cookie = 'wallet=;';
+          }}
+        >
+          {children}
+        </ConnectKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

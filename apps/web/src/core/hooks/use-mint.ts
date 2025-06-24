@@ -5,7 +5,7 @@ import { useToast } from './use-toast';
 export const useMint = () => {
   const { toast } = useToast();
 
-  const { setTxHash } = useWaitForTransactionReceipt({ query: 'mints' });
+  const { setTxHash } = useWaitForTransactionReceipt({ query: 'nfts' });
 
   const { writeContract, loading } = useWriteContract();
 

@@ -3,19 +3,24 @@
 import { memo } from 'react';
 import Image from 'next/image';
 import { useAccount } from 'wagmi';
+import { useModal } from 'connectkit';
 
 import type { INFT } from '@/core/interfaces/nft';
 
 import { useNFT } from './hooks/use-nft';
 
 export const NFT: React.FC<INFT> = memo(({ id, collection, image, name, status, owner }) => {
+  const { setOpen } = useModal();
   const { status: statusWallet } = useAccount();
   const { actions } = useNFT({ status });
 
   const action = actions?.action;
   const label = actions?.label;
 
-  const isAvailable = (owner === 'You' || status === 'Mint') && statusWallet === 'connected';
+  const isAvailable = status === 'Mint' || owner === 'You';
+
+  const actionButton = () =>
+    statusWallet === 'disconnected' ? setOpen(true) : action({ tokenId: id });
 
   return (
     <div className="flex border rounded-lg w-full xl:w-[420px] relative">
@@ -48,7 +53,7 @@ export const NFT: React.FC<INFT> = memo(({ id, collection, image, name, status, 
         <button
           type="button"
           className="absolute right-4 top-4 cursor-pointer bg-primary p-2 rounded-lg text-primary-foreground"
-          onClick={() => action({ tokenId: id })}
+          onClick={() => actionButton()}
         >
           {label}
         </button>
