@@ -7,6 +7,7 @@ import { http, WagmiProvider, createConfig } from 'wagmi';
 import { localhost } from 'wagmi/chains';
 
 import { constants } from '../utils/constants';
+import { queryClient } from '@/configs/request/queryClient';
 
 const walletConnectProjectId = '';
 
@@ -33,8 +34,6 @@ export const config = createConfig(
     appIcon: 'https://cdn-icons-png.flaticon.com/128/4064/4064205.png',
   })
 );
-
-const queryClient = new QueryClient();
 
 export const Web3Provider = ({ children }: { children: ReactNode }) => {
   return (

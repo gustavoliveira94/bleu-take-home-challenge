@@ -28,7 +28,7 @@ export const NFT: React.FC<INFT> = memo(({ id, collection, image, name, status, 
         src={image}
         alt={name}
         width={240}
-        height={275}
+        height={272}
         quality={100}
         className="object-cover"
       />
