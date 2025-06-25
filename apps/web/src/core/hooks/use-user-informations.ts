@@ -9,10 +9,22 @@ import { useReadContract } from './use-read-contract';
 
 export const useUserInformations = () => {
   const { address } = useAccount();
-  const { data } = useReadContract({
-    contract: 'stake',
-    functionName: 'rewardsOf',
-    args: [address],
+  const { readContract } = useReadContract();
+
+  const rewards = async () => {
+    const result = await readContract({
+      contract: 'stake',
+      functionName: 'rewardsOf',
+      args: [address],
+    });
+
+    return result as BigInt;
+  };
+
+  const { data: totalRewards } = useQuery<BigInt>({
+    queryKey: ['total-rewards'],
+    queryFn: () => rewards(),
+    enabled: !!address,
   });
 
   const { data: totalStaked } = useQuery<{ stakes: { totalCount: number } }>({
@@ -46,6 +58,6 @@ export const useUserInformations = () => {
   return {
     totalStaked: totalStaked?.stakes?.totalCount || 0,
     totalNFTs: totalNFTsCount?.mints?.totalCount || 0,
-    totalRewards: `${Number(data) / 10 ** 18 || 0} BLEU`,
+    totalRewards: `${Number(totalRewards) / 10 ** 18 || 0} BLEU`,
   };
 };

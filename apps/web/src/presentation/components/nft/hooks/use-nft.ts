@@ -25,7 +25,10 @@ export const useNFT = ({ status }: IUseNFT) => {
     },
   };
 
+  const isFetching = stakeLoading || mintLoading;
+
   return {
     actions: actions[status as keyof typeof actions],
+    isFetching,
   };
 };

@@ -5,7 +5,7 @@ import type { INFT } from '@/core/interfaces/nft';
 
 interface NFTsProps {
   children: ({ nfts }: { nfts: INFT[] }) => React.ReactNode;
-  address: `0x${string}`;
+  address?: `0x${string}`;
 }
 
 export const NFTs: React.FC<NFTsProps> = ({ children, address }) => {

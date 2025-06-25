@@ -12,7 +12,7 @@ import { useNFT } from './hooks/use-nft';
 export const NFT: React.FC<INFT> = memo(({ id, collection, image, name, status, owner }) => {
   const { setOpen } = useModal();
   const { status: statusWallet } = useAccount();
-  const { actions } = useNFT({ status });
+  const { actions, isFetching } = useNFT({ status });
 
   const action = actions?.action;
   const label = actions?.label;
@@ -54,6 +54,7 @@ export const NFT: React.FC<INFT> = memo(({ id, collection, image, name, status, 
           type="button"
           className="absolute right-4 top-4 cursor-pointer bg-primary p-2 rounded-lg text-primary-foreground"
           onClick={() => actionButton()}
+          disabled={isFetching}
         >
           {label}
         </button>

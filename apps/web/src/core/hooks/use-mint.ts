@@ -5,7 +5,7 @@ import { useToast } from './use-toast';
 export const useMint = () => {
   const { toast } = useToast();
 
-  const { setTxHash } = useWaitForTransactionReceipt({ query: 'nfts' });
+  const { setTxHash } = useWaitForTransactionReceipt({ queries: ['nfts'] });
 
   const { writeContract, loading } = useWriteContract();
 
@@ -17,8 +17,10 @@ export const useMint = () => {
         functionName: 'mint',
       });
 
-      setTxHash(tx!);
-      toast({ message: 'Minting successful' });
+      setTxHash(tx!, {
+        onSuccess: () => toast({ message: 'Minting successful' }),
+        onError: () => toast({ message: 'Error minting', type: 'error' }),
+      });
     } catch (error) {
       toast({ message: 'Error minting', type: 'error' });
     }

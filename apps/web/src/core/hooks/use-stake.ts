@@ -1,5 +1,4 @@
 import { configContract } from '../utils/config-contracts';
-import { useReadContract } from './use-read-contract';
 import { useToast } from './use-toast';
 import { useWaitForTransactionReceipt } from './use-wait-for-transaction-receipt';
 import { useWriteContract } from './use-write-contract';
@@ -7,7 +6,9 @@ import { useWriteContract } from './use-write-contract';
 export const useStake = () => {
   const { toast } = useToast();
 
-  const { setTxHash } = useWaitForTransactionReceipt({ query: 'nfts' });
+  const { setTxHash } = useWaitForTransactionReceipt({
+    queries: ['nfts', 'total-rewards', 'stake-by-user-count'],
+  });
 
   const { writeContract, loading } = useWriteContract();
 
@@ -25,8 +26,10 @@ export const useStake = () => {
         functionName: 'stake',
       });
 
-      setTxHash(tx!);
-      toast({ message: 'Staking successful' });
+      setTxHash(tx!, {
+        onSuccess: () => toast({ message: 'Staking successful' }),
+        onError: () => toast({ message: 'Error staking', type: 'error' }),
+      });
     } catch (error) {
       toast({ message: 'Error staking', type: 'error' });
     }
@@ -40,8 +43,10 @@ export const useStake = () => {
         functionName: 'unstake',
       });
 
-      setTxHash(tx!);
-      toast({ message: 'Unstaking successful' });
+      setTxHash(tx!, {
+        onSuccess: () => toast({ message: 'Unstaking successful' }),
+        onError: () => toast({ message: 'Error unstaking', type: 'error' }),
+      });
     } catch (error) {
       toast({ message: 'Error unstaking', type: 'error' });
     }
