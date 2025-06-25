@@ -14,28 +14,36 @@ export const Transactions: React.FC<TransactionsProps> = ({ transactions }) => {
   const { stakes, mints, unstake } = transactions;
 
   return (
-    <section className="w-full max-w-[1300px] mx-auto space-y-4">
-      <div className="flex gap-4">
-        <div className="w-full pt-[24px]">
-          <div className="flex items-center gap-[8px] mb-[12px] justify-center">
+    <section className="w-full max-w-[1300px] mx-auto space-y-4 px-4">
+      <div className="flex lg:flex-row flex-col gap-4">
+        <div className="w-full pt-6">
+          <div className="flex items-center gap-2 mb-3 justify-center md:justify-start">
             <NotepadTextIcon className="text-primary" />
-            <h3 className="text-[14px]">MINTS</h3>
+            <h3 className="text-sm">MINTS</h3>
           </div>
-          <Table columns={['Token ID', 'Owner', 'Minted At']} rows={mints} />
+          <div className="overflow-auto">
+            <Table columns={['Token ID', 'Owner', 'Minted At']} rows={mints} />
+          </div>
         </div>
-        <div className="w-full pt-[24px]">
-          <div className="flex items-center gap-[8px] mb-[12px] justify-center">
+
+        <div className="w-full pt-6">
+          <div className="flex items-center gap-2 mb-3 justify-center md:justify-start">
             <NotepadTextIcon className="text-primary" />
-            <h3 className="text-[14px]">STAKES</h3>
+            <h3 className="text-sm">STAKES</h3>
           </div>
-          <Table columns={['Token ID', 'Owner', 'Staked At']} rows={stakes} />
+          <div className="overflow-auto">
+            <Table columns={['Token ID', 'Owner', 'Staked At']} rows={stakes} />
+          </div>
         </div>
-        <div className="w-full pt-[24px]">
-          <div className="flex items-center gap-[8px] mb-[12px] justify-center">
+
+        <div className="w-full pt-6">
+          <div className="flex items-center gap-2 mb-3 justify-center md:justify-start">
             <NotepadTextIcon className="text-primary" />
-            <h3 className="text-[14px]">UNSTAKES</h3>
+            <h3 className="text-sm">UNSTAKES</h3>
           </div>
-          <Table columns={['Token ID', 'Owner', 'Unstaked At']} rows={unstake} />
+          <div className="overflow-auto">
+            <Table columns={['Token ID', 'Owner', 'Unstaked At']} rows={unstake} />
+          </div>
         </div>
       </div>
     </section>
