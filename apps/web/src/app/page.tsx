@@ -9,10 +9,14 @@ export default async function HomePage() {
   const cookieStore = cookies();
   const address = ((await cookieStore).get('wallet')?.value as `0x${string}`) ?? null;
 
-  await queryClient.ensureQueryData({
-    queryKey: ['nfts', address],
-    queryFn: () => getNFTs({ address }),
-  });
+  try {
+    await queryClient.ensureQueryData({
+      queryKey: ['nfts', address],
+      queryFn: () => getNFTs({ address }),
+    });
+  } catch (error) {
+    queryClient.setQueryData(['nfts', address], []);
+  }
 
   const dehydratedState = dehydrate(queryClient);
 
