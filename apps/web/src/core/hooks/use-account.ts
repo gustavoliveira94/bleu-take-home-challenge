@@ -5,7 +5,12 @@ export const useAccount = () => {
   const { address, status } = useAccountWagmi();
 
   useEffect(() => {
-    document.cookie = 'wallet=;';
+    if (!address) {
+      document.cookie = 'wallet=;';
+
+      return;
+    }
+
     document.cookie = `wallet=${address};`;
   }, [address]);
 
