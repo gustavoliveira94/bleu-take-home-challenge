@@ -1,15 +1,17 @@
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
 import type { ReactNode } from 'react';
 import { http, WagmiProvider, createConfig } from 'wagmi';
 import { localhost } from 'wagmi/chains';
 
 import { constants } from '../utils/constants';
-import { queryClient } from '@/configs/request/queryClient';
+import { createQueryClient } from '@/configs/request/queryClient';
 
 const walletConnectProjectId = '';
+
+const queryClient = createQueryClient();
 
 export const config = createConfig(
   getDefaultConfig({

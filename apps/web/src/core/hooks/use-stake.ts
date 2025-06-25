@@ -1,4 +1,5 @@
 import { configContract } from '../utils/config-contracts';
+import { useReadContract } from './use-read-contract';
 import { useToast } from './use-toast';
 import { useWaitForTransactionReceipt } from './use-wait-for-transaction-receipt';
 import { useWriteContract } from './use-write-contract';
@@ -6,7 +7,7 @@ import { useWriteContract } from './use-write-contract';
 export const useStake = () => {
   const { toast } = useToast();
 
-  const { setTxHash } = useWaitForTransactionReceipt({ query: 'stakes' });
+  const { setTxHash } = useWaitForTransactionReceipt({ query: 'nfts' });
 
   const { writeContract, loading } = useWriteContract();
 

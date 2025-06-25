@@ -22,9 +22,7 @@ export async function getNFTs({ address }: NFTsSSRParams): Promise<INFT[]> {
   const mapped = nftMockList
     .map((nft) => {
       const minted = mints.find(({ tokenId }) => tokenId === nft.id);
-      const isOwner =
-        stakes.find(({ tokenId }) => tokenId === nft.id)?.owner === address ||
-        minted?.owner === address;
+      const isOwner = minted?.owner === address;
       const staked = stakes.find(({ tokenId, active }) => tokenId === nft.id && active);
 
       let ownerDisplay = '-';

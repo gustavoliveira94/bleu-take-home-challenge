@@ -6,10 +6,11 @@ import { useAccount } from './use-account';
 export const useNFTs = ({ address: addressCookie }: { address: `0x${string}` }) => {
   const { address } = useAccount();
 
+  const newAddress = address || addressCookie;
+
   const { data, isLoading } = useQuery({
-    queryKey: ['nfts', address || addressCookie],
-    queryFn: () => getNFTs({ address }),
-    enabled: !!address,
+    queryKey: ['nfts', newAddress],
+    queryFn: () => getNFTs({ address: newAddress }),
   });
 
   return {
